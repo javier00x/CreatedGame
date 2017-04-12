@@ -19,6 +19,14 @@ namespace Play_With_My_Balls
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        enum GameStates { TitleScreen, Playing, FailedAtLife, Gameover };
+        GameStates gameState = GameStates.TitleScreen;
+        Texture2D titleScreen;
+        Texture2D spriteSheet;
+        Texture2D backGround;
+
+        StarField starField;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -47,6 +55,16 @@ namespace Play_With_My_Balls
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            titleScreen = Content.Load<Texture2D>(@"Textures\TitleScreen");
+            spriteSheet = Content.Load<Texture2D>(@"Textures\SpriteSheet");
+            backGround = Content.Load<Texture2D>(@"Textures\BackGround");
+            starField = new StarField(
+                this.Window.ClientBounds.Width,
+                this.Window.ClientBounds.Height,
+                200,
+                new Vector2(0, 30f),
+                spriteSheet,
+                new Rectangle(0, 450, 2, 2));
             // TODO: use this.Content to load your game content here
         }
 
@@ -70,7 +88,32 @@ namespace Play_With_My_Balls
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+
             // TODO: Add your update logic here
+            switch (gameState)
+            {
+                case GameStates.TitleScreen:
+                    KeyboardState kb = Keyboard.GetState();
+
+                    if (kb.IsKeyDown(Keys.Space))
+                    {
+                        gameState = GameStates.Playing;
+                    }
+
+                    break;
+
+                case GameStates.Playing:
+                    break;
+
+                case GameStates.FailedAtLife:
+                    break;
+
+                case GameStates.Gameover:
+                    break;  
+            }
+
+
+
 
             base.Update(gameTime);
         }
@@ -83,7 +126,25 @@ namespace Play_With_My_Balls
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            if (gameState == GameStates.TitleScreen)
+            {
+                spriteBatch.Draw(titleScreen, new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
+            }
+           
+
+            if ((gameState == GameStates.Playing) ||
+                (gameState == GameStates.FailedAtLife) ||
+                (gameState == GameStates.Gameover))
+            {
+
+                spriteBatch.Draw(backGround, new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
+                starField.Draw(spriteBatch);
+
+            }
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
