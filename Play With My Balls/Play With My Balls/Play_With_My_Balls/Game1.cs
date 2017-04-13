@@ -24,8 +24,10 @@ namespace Play_With_My_Balls
         Texture2D titleScreen;
         Texture2D spriteSheet;
         Texture2D backGround;
-
+        Sprite ball;
         StarField starField;
+
+        float ballSpeed = 550;
 
         public Game1()
         {
@@ -65,7 +67,7 @@ namespace Play_With_My_Balls
                 new Vector2(0, 30f),
                 spriteSheet,
                 new Rectangle(0, 450, 2, 2));
-            // TODO: use this.Content to load your game content here
+            ball = new Sprite(new Vector2(0, 30f), spriteSheet, new Rectangle(5, 12, 220, 208), new Vector2(2;         // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -103,8 +105,9 @@ namespace Play_With_My_Balls
                     break;
 
                 case GameStates.Playing:
+                    
                     break;
-
+                    
                 case GameStates.FailedAtLife:
                     break;
 
@@ -141,7 +144,7 @@ namespace Play_With_My_Balls
 
                 spriteBatch.Draw(backGround, new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
                 starField.Draw(spriteBatch);
-
+                spriteBatch.Draw(spriteSheet, new Rectangle(5, 12, 220, 208));
             }
 
             spriteBatch.End();
