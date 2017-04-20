@@ -26,8 +26,10 @@ namespace Play_With_My_Balls
         Texture2D backGround;
         Sprite ball;
         StarField starField;
+        SpriteFont fontAwesome;
 
         float ballSpeed = 550;
+        int score = 0;
 
         public Game1()
         {
@@ -44,7 +46,7 @@ namespace Play_With_My_Balls
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            this.IsMouseVisible = true;
             base.Initialize();
         }
 
@@ -60,6 +62,7 @@ namespace Play_With_My_Balls
             titleScreen = Content.Load<Texture2D>(@"Textures\TitleScreen");
             spriteSheet = Content.Load<Texture2D>(@"Textures\SpriteSheet");
             backGround = Content.Load<Texture2D>(@"Textures\BackGround");
+            fontAwesome = Content.Load<SpriteFont>(@"Awesome");
             starField = new StarField(
                 this.Window.ClientBounds.Width,
                 this.Window.ClientBounds.Height,
@@ -67,9 +70,8 @@ namespace Play_With_My_Balls
                 new Vector2(0, 30f),
                 spriteSheet,
                 new Rectangle(0, 450, 2, 2));
-            ball = new Sprite(new Vector2(0, 30f), spriteSheet, new Rectangle(5, 12, 220, 208), new Vector2(20, 0));         // TODO: use this.Content to load your game content here
+            ball = new Sprite(new Vector2(200, 30f), spriteSheet, new Rectangle(5, 12, 220, 208), new Vector2(0, 100));         // TODO: use this.Content to load your game content here
         }
-
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// all content.
@@ -105,13 +107,43 @@ namespace Play_With_My_Balls
                     break;
 
                 case GameStates.Playing:
-                    
+
+                    ball.Velocity += new Vector2(0, 55);
+
+                    MouseState ms = Mouse.GetState();
+                    Vector2 clk = new Vector2(ms.X, ms.Y);
+
+                    if ((ms.LeftButton == ButtonState.Pressed && Vector2.Distance(clk, ball.Center) < ball.BoundingBoxRect.Width / 2 && ball.Velocity.Y > 0))
+                    {
+                        ball.Velocity *= new Vector2(1, -1);
+                        Vector2 move = ball.Center - clk;
+                        move.Normalize();
+                        move *= 300; // Scale the vector by the speed you want
+                        move.Y = -150;  // Set the 
+                        ball.Velocity += move;
+                    }
+
+                    if (ball.Location.Y > this.Window.ClientBounds.Height - ball.BoundingBoxRect.Height)
+                    {
+                        ball.Velocity *= new Vector2(1, -1);
+                    }
+
+                    // Enforce a maximum speed
+                    Vector2 vel = ball.Velocity;
+                    float speed = vel.Length();
+                    vel.Normalize();
+                    vel *= MathHelper.Clamp(speed, 0, 1200);
+                    ball.Velocity = vel;
+
+                    ball.Update(gameTime);
+
                     break;
                     
                 case GameStates.FailedAtLife:
                     break;
 
                 case GameStates.Gameover:
+                    if()
                     break;  
             }
 
@@ -144,7 +176,8 @@ namespace Play_With_My_Balls
 
                 spriteBatch.Draw(backGround, new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
                 starField.Draw(spriteBatch);
-                spriteBatch.DrawString(spriteSheet, new Rectangle(5, 12, 220, 208));
+                ball.Draw(spriteBatch);
+                spriteBatch.DrawString(fontAwesome, "Score: " + score, new Vector2(10, 10), Color.White);
             }
 
             spriteBatch.End();
