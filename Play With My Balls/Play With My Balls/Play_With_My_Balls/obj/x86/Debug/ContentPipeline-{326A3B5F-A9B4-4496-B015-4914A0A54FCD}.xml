@@ -8,7 +8,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\eahscs\Documents\GitHub\CreatedGame\Play With My Balls\Play With My Balls\Play_With_My_Balls\bin\x86\Debug\Content\Textures\SpriteSheet.xnb</Output>
-      <Time>2017-04-20T10:16:07.5952185-04:00</Time>
+      <Time>2017-04-24T12:15:10.0301974-04:00</Time>
     </Item>
     <Item>
       <Source>Textures\TitleScreen.png</Source>
@@ -17,7 +17,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\eahscs\Documents\GitHub\CreatedGame\Play With My Balls\Play With My Balls\Play_With_My_Balls\bin\x86\Debug\Content\Textures\TitleScreen.xnb</Output>
-      <Time>2017-04-20T10:16:07.7241865-04:00</Time>
+      <Time>2017-04-24T12:15:10.2108282-04:00</Time>
     </Item>
     <Item>
       <Source>Textures\BackGround.png</Source>
@@ -26,7 +26,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\eahscs\Documents\GitHub\CreatedGame\Play With My Balls\Play With My Balls\Play_With_My_Balls\bin\x86\Debug\Content\Textures\BackGround.xnb</Output>
-      <Time>2017-04-20T10:16:07.5937174-04:00</Time>
+      <Time>2017-04-24T12:15:10.0281963-04:00</Time>
     </Item>
     <Item>
       <Source>Awesome.spritefont</Source>
@@ -35,7 +35,16 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\eahscs\Documents\GitHub\CreatedGame\Play With My Balls\Play With My Balls\Play_With_My_Balls\bin\x86\Debug\Content\Awesome.xnb</Output>
-      <Time>2017-04-20T10:54:42.5743909-04:00</Time>
+      <Time>2017-04-24T12:15:09.9976751-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Endingscreen.png</Source>
+      <Name>Textures\Endingscreen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\eahscs\Documents\GitHub\CreatedGame\Play With My Balls\Play With My Balls\Play_With_My_Balls\bin\x86\Debug\Content\Textures\Endingscreen.xnb</Output>
+      <Time>2017-04-24T12:33:16.0738168-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

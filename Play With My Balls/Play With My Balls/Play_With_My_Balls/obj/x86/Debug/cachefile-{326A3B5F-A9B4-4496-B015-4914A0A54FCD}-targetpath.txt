@@ -2,3 +2,4 @@ Content\Textures\SpriteSheet.xnb
 Content\Textures\TitleScreen.xnb
 Content\Textures\BackGround.xnb
 Content\Awesome.xnb
+Content\Textures\Endingscreen.xnb

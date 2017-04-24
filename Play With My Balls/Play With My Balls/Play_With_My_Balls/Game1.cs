@@ -27,6 +27,7 @@ namespace Play_With_My_Balls
         Sprite ball;
         StarField starField;
         SpriteFont fontAwesome;
+        Texture2D endingScreen;
 
         float ballSpeed = 550;
         int score = 0;
@@ -59,6 +60,7 @@ namespace Play_With_My_Balls
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            endingScreen = Content.Load <Texture2D>(@"Textures\Endingscreen");
             titleScreen = Content.Load<Texture2D>(@"Textures\TitleScreen");
             spriteSheet = Content.Load<Texture2D>(@"Textures\SpriteSheet");
             backGround = Content.Load<Texture2D>(@"Textures\BackGround");
@@ -121,11 +123,13 @@ namespace Play_With_My_Balls
                         move *= 300; // Scale the vector by the speed you want
                         move.Y = -150;  // Set the 
                         ball.Velocity += move;
+                        score++; 
                     }
 
                     if (ball.Location.Y > this.Window.ClientBounds.Height - ball.BoundingBoxRect.Height)
                     {
-                        ball.Velocity *= new Vector2(1, -1);
+                        //ball.Velocity *= new Vector2(1, -1);
+                        gameState = GameStates.Gameover;
                     }
 
                     // Enforce a maximum speed
@@ -143,7 +147,7 @@ namespace Play_With_My_Balls
                     break;
 
                 case GameStates.Gameover:
-                    if()
+                    
                     break;  
             }
 
@@ -170,8 +174,7 @@ namespace Play_With_My_Balls
            
 
             if ((gameState == GameStates.Playing) ||
-                (gameState == GameStates.FailedAtLife) ||
-                (gameState == GameStates.Gameover))
+                (gameState == GameStates.FailedAtLife))
             {
 
                 spriteBatch.Draw(backGround, new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
@@ -179,7 +182,10 @@ namespace Play_With_My_Balls
                 ball.Draw(spriteBatch);
                 spriteBatch.DrawString(fontAwesome, "Score: " + score, new Vector2(10, 10), Color.White);
             }
-
+            if (gameState == GameStates.Gameover)
+            {
+                spriteBatch.Draw(endingScreen, new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);
