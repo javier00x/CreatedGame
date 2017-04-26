@@ -29,7 +29,7 @@ namespace Play_With_My_Balls
         SpriteFont fontAwesome;
         Texture2D endingScreen;
 
-        float ballSpeed = 550;
+        float ballSpeed = -450;
         int score = 0;
 
         public Game1()
@@ -93,6 +93,9 @@ namespace Play_With_My_Balls
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                this.Exit();
+                
 
 
             // TODO: Add your update logic here
@@ -174,7 +177,7 @@ namespace Play_With_My_Balls
            
 
             if ((gameState == GameStates.Playing) ||
-                (gameState == GameStates.FailedAtLife))
+                (gameState == GameStates.Gameover))
             {
 
                 spriteBatch.Draw(backGround, new Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), Color.White);
